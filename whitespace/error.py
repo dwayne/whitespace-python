@@ -31,6 +31,10 @@ class StackEmptyError(WhitespaceError, IndexError):
             return ''
 
 
+class OutOfBoundsError(WhitespaceError, IndexError):
+    pass
+
+
 class ZeroDivisionError(WhitespaceError, builtins.ZeroDivisionError):
     pass
 
