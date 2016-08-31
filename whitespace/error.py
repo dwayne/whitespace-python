@@ -20,6 +20,14 @@ class AddressMissingError(WhitespaceError, KeyError):
         return str(self.address)
 
 
+class LabelMissingError(WhitespaceError, IndexError):
+    def __init__(self, name):
+        self.name = name
+
+    def __str__(self):
+        return self.name
+
+
 class StackEmptyError(WhitespaceError, IndexError):
     def __init__(self, name):
         self.name = name
@@ -32,4 +40,8 @@ class StackEmptyError(WhitespaceError, IndexError):
 
 
 class ZeroDivisionError(WhitespaceError, builtins.ZeroDivisionError):
+    pass
+
+
+class Halt(WhitespaceError):
     pass

@@ -7,7 +7,7 @@ class VM:
         self.instructions = []
         self._reset()
 
-    def load(instructions):
+    def load(self, instructions):
         self.instructions = list(instructions)
 
     def run(self):
