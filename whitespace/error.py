@@ -5,6 +5,8 @@ doesn't define any behavior of its own, but is the base class for all exceptions
 defined in this package.
 """
 
+import builtins
+
 
 class WhitespaceError(Exception):
     pass
@@ -27,3 +29,7 @@ class StackEmptyError(WhitespaceError, IndexError):
             return self.name
         else:
             return ''
+
+
+class ZeroDivisionError(WhitespaceError, builtins.ZeroDivisionError):
+    pass
