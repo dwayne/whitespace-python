@@ -1,9 +1,11 @@
+from .console import Console
 from .memory import Memory
 from .stack import Stack
 
 
 class VM:
-    def __init__(self):
+    def __init__(self, console=Console()):
+        self.console = console
         self.instructions = []
         self._reset()
 
