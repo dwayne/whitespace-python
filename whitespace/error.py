@@ -13,19 +13,11 @@ class WhitespaceError(Exception):
 
 
 class AddressMissingError(WhitespaceError, KeyError):
-    def __init__(self, address):
-        self.address = address
-
-    def __str__(self):
-        return str(self.address)
+    pass
 
 
 class LabelMissingError(WhitespaceError, IndexError):
-    def __init__(self, name):
-        self.name = name
-
-    def __str__(self):
-        return self.name
+    pass
 
 
 class StackEmptyError(WhitespaceError, IndexError):
@@ -40,6 +32,10 @@ class StackEmptyError(WhitespaceError, IndexError):
 
 
 class ZeroDivisionError(WhitespaceError, builtins.ZeroDivisionError):
+    pass
+
+
+class ConsoleError(WhitespaceError):
     pass
 
 
