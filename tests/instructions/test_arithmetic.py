@@ -11,7 +11,10 @@ class TestAdd(unittest.TestCase):
         vm.vstack.push(3)
         vm.vstack.push(2)
 
-        Add(vm).execute()
+        add = Add()
+        add.vm = vm
+
+        add.execute()
 
         self.assertEqual(len(vm.vstack), 1)
         self.assertEqual(vm.vstack.top(), 5)
@@ -23,7 +26,10 @@ class TestSub(unittest.TestCase):
         vm.vstack.push(3)
         vm.vstack.push(2)
 
-        Sub(vm).execute()
+        sub = Sub()
+        sub.vm = vm
+
+        sub.execute()
 
         self.assertEqual(len(vm.vstack), 1)
         self.assertEqual(vm.vstack.top(), 1)
@@ -35,7 +41,10 @@ class TestMul(unittest.TestCase):
         vm.vstack.push(3)
         vm.vstack.push(2)
 
-        Mul(vm).execute()
+        mul = Mul()
+        mul.vm = vm
+
+        mul.execute()
 
         self.assertEqual(len(vm.vstack), 1)
         self.assertEqual(vm.vstack.top(), 6)
@@ -47,7 +56,10 @@ class TestDiv(unittest.TestCase):
         vm.vstack.push(7)
         vm.vstack.push(2)
 
-        Div(vm).execute()
+        div = Div()
+        div.vm = vm
+
+        div.execute()
 
         self.assertEqual(len(vm.vstack), 1)
         self.assertEqual(vm.vstack.top(), 3)
@@ -57,8 +69,11 @@ class TestDiv(unittest.TestCase):
         vm.vstack.push(1)
         vm.vstack.push(0)
 
+        div = Div()
+        div.vm = vm
+
         with self.assertRaisesRegex(ZeroDivisionError, 'integer division by zero'):
-            Div(vm).execute()
+            div.execute()
 
 
 class TestMod(unittest.TestCase):
@@ -67,7 +82,10 @@ class TestMod(unittest.TestCase):
         vm.vstack.push(7)
         vm.vstack.push(2)
 
-        Mod(vm).execute()
+        mod = Mod()
+        mod.vm = vm
+
+        mod.execute()
 
         self.assertEqual(len(vm.vstack), 1)
         self.assertEqual(vm.vstack.top(), 1)
@@ -77,5 +95,8 @@ class TestMod(unittest.TestCase):
         vm.vstack.push(1)
         vm.vstack.push(0)
 
+        mod = Mod()
+        mod.vm = vm
+
         with self.assertRaisesRegex(ZeroDivisionError, 'modulo by zero'):
-            Mod(vm).execute()
+            mod.execute()

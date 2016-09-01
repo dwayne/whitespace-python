@@ -12,7 +12,10 @@ class PutcTest(unittest.TestCase):
         vm = VM(console=console)
         vm.vstack.push(97)
 
-        Putc(vm).execute()
+        putc = Putc()
+        putc.vm = vm
+
+        putc.execute()
 
         self.assertEqual(len(vm.vstack), 0)
         self.assertEqual(console.output.getvalue(), 'a')
@@ -26,7 +29,10 @@ class PutnTest(unittest.TestCase):
         vm = VM(console=console)
         vm.vstack.push(97)
 
-        Putn(vm).execute()
+        putn = Putn()
+        putn.vm = vm
+
+        putn.execute()
 
         self.assertEqual(len(vm.vstack), 0)
         self.assertEqual(console.output.getvalue(), '97')
@@ -40,7 +46,10 @@ class GetcTest(unittest.TestCase):
         vm = VM(console=console)
         vm.vstack.push(100)
 
-        Getc(vm).execute()
+        getc = Getc()
+        getc.vm = vm
+
+        getc.execute()
 
         self.assertEqual(len(vm.vstack), 0)
         self.assertEqual(vm.memory[100], 97)
@@ -54,7 +63,10 @@ class GetnTest(unittest.TestCase):
         vm = VM(console=console)
         vm.vstack.push(100)
 
-        Getn(vm).execute()
+        getn = Getn()
+        getn.vm = vm
+
+        getn.execute()
 
         self.assertEqual(len(vm.vstack), 0)
         self.assertEqual(vm.memory[100], 1234)

@@ -45,3 +45,7 @@ class ConsoleError(WhitespaceError):
 
 class Halt(WhitespaceError):
     pass
+
+
+class ParseError(WhitespaceError):
+    pass

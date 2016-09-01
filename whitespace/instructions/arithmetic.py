@@ -3,27 +3,27 @@ from .instruction import Instruction
 
 
 class Add(Instruction):
-    def execute(self):
+    def _execute(self):
         _compute(self.vm, '+')
 
 
 class Sub(Instruction):
-    def execute(self):
+    def _execute(self):
         _compute(self.vm, '-')
 
 
 class Mul(Instruction):
-    def execute(self):
+    def _execute(self):
         _compute(self.vm, '*')
 
 
 class Div(Instruction):
-    def execute(self):
+    def _execute(self):
         _compute(self.vm, '/')
 
 
 class Mod(Instruction):
-    def execute(self):
+    def _execute(self):
         _compute(self.vm, '%')
 
 

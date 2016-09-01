@@ -2,27 +2,31 @@ import unittest
 
 from whitespace.error import Halt, LabelMissingError
 from whitespace.instructions.flow_control import Call, End, Label, Njmp, Ret, Ujmp, Zjmp, find_label
+from whitespace.instructions.instruction import Noop
 from whitespace.vm import VM
 
 
 class TestLabel(unittest.TestCase):
     def test_it_does_not_fail(self):
-        Label(None, ' ').execute()
+        Label(' ').execute()
 
 
 class TestCall(unittest.TestCase):
     def test_it_calls_a_subroutine(self):
         vm = VM()
         vm.load([
-            'instruction 1',
-            Label(vm, ' '),
-            'instruction 3',
-            'instruction 4',
-            'instruction 5'
+            Noop(),
+            Label(' '),
+            Noop(),
+            Noop(),
+            Noop()
         ])
         vm.pc = 4
 
-        Call(vm, ' ').execute()
+        call = Call(' ')
+        call.vm = vm
+
+        call.execute()
 
         self.assertEqual(len(vm.cstack), 1)
         self.assertEqual(vm.cstack.top(), 4)
@@ -33,13 +37,16 @@ class TestUjmp(unittest.TestCase):
     def test_it_changes_the_program_counter_to_the_index_of_the_instruction_after_the_label(self):
         vm = VM()
         vm.load([
-            Label(vm, ' '),
-            'instruction 2',
-            'instruction 3'
+            Label(' '),
+            Noop(),
+            Noop()
         ])
         vm.pc = 2
 
-        Ujmp(vm, ' ').execute()
+        ujmp = Ujmp(' ')
+        ujmp.vm = vm
+
+        ujmp.execute()
 
         self.assertEqual(vm.pc, 1)
 
@@ -48,14 +55,17 @@ class TestZjmpZero(unittest.TestCase):
     def test_it_changes_the_program_counter_to_the_index_of_the_instruction_after_the_label(self):
         vm = VM()
         vm.load([
-            Label(vm, ' '),
-            'instruction 2',
-            'instruction 3'
+            Label(' '),
+            Noop(),
+            Noop()
         ])
         vm.vstack.push(0)
         vm.pc = 2
 
-        Zjmp(vm, ' ').execute()
+        zjmp = Zjmp(' ')
+        zjmp.vm = vm
+
+        zjmp.execute()
 
         self.assertEqual(len(vm.vstack), 0)
         self.assertEqual(vm.pc, 1)
@@ -65,14 +75,17 @@ class TestZjmpNonZero(unittest.TestCase):
     def test_it_does_not_change_the_program_counter(self):
         vm = VM()
         vm.load([
-            Label(vm, ' '),
-            'instruction 2',
-            'instruction 3'
+            Label(' '),
+            Noop(),
+            Noop()
         ])
         vm.vstack.push(1)
         vm.pc = 2
 
-        Zjmp(vm, ' ').execute()
+        zjmp = Zjmp(' ')
+        zjmp.vm = vm
+
+        zjmp.execute()
 
         self.assertEqual(len(vm.vstack), 0)
         self.assertEqual(vm.pc, 2)
@@ -82,14 +95,17 @@ class TestNjmpNegative(unittest.TestCase):
     def test_it_changes_the_program_counter_to_the_index_of_the_instruction_after_the_label(self):
         vm = VM()
         vm.load([
-            Label(vm, ' '),
-            'instruction 2',
-            'instruction 3'
+            Label(' '),
+            Noop(),
+            Noop()
         ])
         vm.vstack.push(-1)
         vm.pc = 2
 
-        Njmp(vm, ' ').execute()
+        njmp = Njmp(' ')
+        njmp.vm = vm
+
+        njmp.execute()
 
         self.assertEqual(len(vm.vstack), 0)
         self.assertEqual(vm.pc, 1)
@@ -99,14 +115,17 @@ class TestNjmpNonNegative(unittest.TestCase):
     def test_it_does_not_change_the_program_counter(self):
         vm = VM()
         vm.load([
-            Label(vm, ' '),
-            'instruction 2',
-            'instruction 3'
+            Label(' '),
+            Noop(),
+            Noop()
         ])
         vm.vstack.push(0)
         vm.pc = 2
 
-        Njmp(vm, ' ').execute()
+        njmp = Njmp(' ')
+        njmp.vm = vm
+
+        njmp.execute()
 
         self.assertEqual(len(vm.vstack), 0)
         self.assertEqual(vm.pc, 2)
@@ -117,7 +136,10 @@ class TestRet(unittest.TestCase):
         vm = VM()
         vm.cstack.push(5)
 
-        Ret(vm).execute()
+        ret = Ret()
+        ret.vm = vm
+
+        ret.execute()
 
         self.assertEqual(len(vm.cstack), 0)
         self.assertEqual(vm.pc, 5)
@@ -125,18 +147,20 @@ class TestRet(unittest.TestCase):
 
 class TestEnd(unittest.TestCase):
     def test_it_raises_halt(self):
+        end = End()
+
         with self.assertRaises(Halt):
-            End(None).execute()
+            end.execute()
 
 
 class TestFindLabel(unittest.TestCase):
     def setUp(self):
         self.instructions = [
-            'instruction 1',
-            Label(None, ' '),
-            'instruction 3',
-            Label(None, '  '),
-            'instruction 5'
+            Noop(),
+            Label(' '),
+            Noop(),
+            Label('  '),
+            Noop()
         ]
 
     def test_it_returns_index_when_the_label_exists(self):
