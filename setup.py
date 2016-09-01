@@ -2,7 +2,7 @@ import re
 
 from codecs import open
 
-from setuptools import setup
+from setuptools import find_packages, setup
 
 
 with open('whitespace/__init__.py', 'r', 'utf-8') as f:
@@ -35,7 +35,7 @@ setup(
         'Topic :: Software Development :: Interpreters'
     ],
     keywords='whitespace',
-    packages=['whitespace'],
+    packages=find_packages(),
     entry_points={
         'console_scripts': [
             'whitespace=whitespace.cli:main'
