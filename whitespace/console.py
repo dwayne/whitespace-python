@@ -14,10 +14,10 @@ class Console:
         except ValueError:
             raise ConsoleError('invalid Unicode code point: %s' % n)
         else:
-            self.output.write(c)
+            self._write(c)
 
     def putn(self, n):
-        self.output.write(str(n))
+        self._write(str(n))
 
     def getc(self):
         c = self.input.read(1)
@@ -39,3 +39,7 @@ class Console:
                 raise ConsoleError('not a number: %s' % s)
             else:
                 return n
+
+    def _write(self, s):
+        self.output.write(s)
+        self.output.flush()
