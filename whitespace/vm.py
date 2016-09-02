@@ -11,6 +11,9 @@ class VM:
         self._reset()
 
     def load(self, instructions):
+        for instruction in instructions:
+            instruction.vm = self
+
         self.instructions = list(instructions)
 
     def run(self):

@@ -11,11 +11,11 @@ class TestVM(unittest.TestCase):
     def test_it_executes_each_instruction_one_by_one_until_an_end_instruction_is_reached(self):
         vm = VM()
         vm.load([
-            Push(vm, 3),
-            Dup(vm),
-            Mul(vm),
-            End(vm),
-            Dup(vm)
+            Push(3),
+            Dup(),
+            Mul(),
+            End(),
+            Dup()
         ])
 
         vm.run()
@@ -26,9 +26,9 @@ class TestVM(unittest.TestCase):
     def test_it_raises_error_when_no_end_instruction_is_reached(self):
         vm = VM()
         vm.load([
-            Push(vm, 3),
-            Dup(vm),
-            Mul(vm)
+            Push(3),
+            Dup(),
+            Mul()
         ])
 
         with self.assertRaisesRegex(OutOfBoundsError, 'program counter: 3'):
@@ -40,22 +40,22 @@ class TestCountProgram(unittest.TestCase):
         console = Console(output=io.StringIO())
         vm = VM(console=console)
         vm.load([
-            Push(vm, 1),        # Put a 1 on the stack
-            Label(vm, ' '),     # Set a Label at this point
-            Dup(vm),            # Duplicate the top stack item
-            Putn(vm),           # Output the current value
-            Push(vm, 10),       # Put 10 (newline) on the stack...
-            Putc(vm),           # ...and output the newline
-            Push(vm, 1),        # Put a 1 on the stack
-            Add(vm),            # Increment our current value
-            Dup(vm),            # Duplicate the value to test it
-            Push(vm, 11),       # Push 11 onto the stack
-            Sub(vm),            # Subtraction
-            Zjmp(vm, '\t'),     # If we have a 0, jump to the end
-            Ujmp(vm, ' '),      # Jump to the start
-            Label(vm, '\t'),    # Set the end label
-            Discard(vm),        # Discard our accumulator, to be tidy
-            End(vm)             # Finish
+            Push(1),        # Put a 1 on the stack
+            Label(' '),     # Set a Label at this point
+            Dup(),          # Duplicate the top stack item
+            Putn(),         # Output the current value
+            Push(10),       # Put 10 (newline) on the stack...
+            Putc(),         # ...and output the newline
+            Push(1),        # Put a 1 on the stack
+            Add(),          # Increment our current value
+            Dup(),          # Duplicate the value to test it
+            Push(11),       # Push 11 onto the stack
+            Sub(),          # Subtraction
+            Zjmp('\t'),     # If we have a 0, jump to the end
+            Ujmp(' '),      # Jump to the start
+            Label('\t'),    # Set the end label
+            Discard(),      # Discard our accumulator, to be tidy
+            End()           # Finish
         ])
 
         vm.run()

@@ -2,7 +2,7 @@ from .instruction import Instruction
 
 
 class Store(Instruction):
-    def execute(self):
+    def _execute(self):
         value = self.vm.vstack.pop()
         address = self.vm.vstack.pop()
 
@@ -10,7 +10,7 @@ class Store(Instruction):
 
 
 class Retrieve(Instruction):
-    def execute(self):
+    def _execute(self):
         address = self.vm.vstack.pop()
 
         self.vm.vstack.push(self.vm.memory[address])
