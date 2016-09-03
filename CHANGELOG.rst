@@ -1,8 +1,8 @@
 Change Log
 ----------
 
-`Unreleased`_
-+++++++++++++
+`1.0.0b2`_ (2016-09-03)
++++++++++++++++++++++++
 
 **Added**
 
@@ -53,7 +53,8 @@ Change Log
 
 Birth!
 
-.. _`Unreleased`: https://github.com/dwayne/whitespace-python/compare/v1.0.0b1...HEAD
+.. _`Unreleased`: https://github.com/dwayne/whitespace-python/compare/v1.0.0b2...HEAD
+.. _`1.0.0b2`: https://github.com/dwayne/whitespace-python/compare/v1.0.0b1...v1.0.0b2
 .. _`1.0.0b1`: https://github.com/dwayne/whitespace-python/compare/v0.1.0.dev2...v1.0.0b1
 .. _`0.1.0.dev2`: https://github.com/dwayne/whitespace-python/compare/v0.1.0.dev1...v0.1.0.dev2
 .. _`0.1.0.dev1`: https://github.com/dwayne/whitespace-python/compare/v0.0.1.dev1...v0.1.0.dev1
