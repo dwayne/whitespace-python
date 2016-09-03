@@ -12,9 +12,13 @@ with open('README.rst', encoding='utf-8') as f:
     readme = f.read()
 
 
+with open('CHANGELOG.rst', encoding='utf-8') as f:
+    changelog = f.read()
+
+
 packages = [
     'whitespace',
-    'whitespace.instructions',
+    'whitespace.instructions'
 ]
 
 
@@ -22,7 +26,7 @@ setup(
     name='whitespace',
     version=version,
     description='A Whitespace interpreter.',
-    long_description=readme,
+    long_description=readme + '\n\n' + changelog,
     url='https://github.com/dwayne/whitespace-python',
     author='Dwayne Crooks',
     author_email='me@dwaynecrooks.com',
