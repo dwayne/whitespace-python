@@ -5,7 +5,7 @@ from whitespace.error import StackEmptyError
 from whitespace.stack import Stack
 
 
-class TestEmptyStack(unittest.TestCase):
+class EmptyStackTestCase(unittest.TestCase):
     def setUp(self):
         self.empty_stack = Stack()
 
@@ -26,7 +26,7 @@ class TestEmptyStack(unittest.TestCase):
         self.assertEqual(len(self.empty_stack), 0)
 
 
-class TestNonEmptyStack(unittest.TestCase):
+class NonEmptyStackTestCase(unittest.TestCase):
     def setUp(self):
         self.stack = Stack()
         for x in range(1, 4):
@@ -41,7 +41,7 @@ class TestNonEmptyStack(unittest.TestCase):
         self.assertEqual(len(self.stack), 3)
 
 
-class TestNamedStack(unittest.TestCase):
+class NamedStackTestCase(unittest.TestCase):
     def test_name_is_included_in_error_message(self):
         stack = Stack('named stack')
 

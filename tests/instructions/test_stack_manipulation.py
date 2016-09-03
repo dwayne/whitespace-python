@@ -4,7 +4,7 @@ from whitespace.instructions.stack_manipulation import Discard, Dup, Push, Swap
 from whitespace.vm import VM
 
 
-class TestPush(unittest.TestCase):
+class PushTestCase(unittest.TestCase):
     def test_it_pushes_a_number_onto_the_value_stack(self):
         vm = VM()
 
@@ -17,7 +17,7 @@ class TestPush(unittest.TestCase):
         self.assertEqual(vm.vstack.top(), 1)
 
 
-class TestDup(unittest.TestCase):
+class DupTestCase(unittest.TestCase):
     def test_it_duplicates_the_top_item_on_the_value_stack(self):
         vm = VM()
         vm.vstack.push(1)
@@ -32,7 +32,7 @@ class TestDup(unittest.TestCase):
         self.assertEqual(vm.vstack.pop(), 1)
 
 
-class TestSwap(unittest.TestCase):
+class SwapTestCase(unittest.TestCase):
     def test_it_swaps_the_two_top_items_on_the_value_stack(self):
         vm = VM()
         vm.vstack.push(1)
@@ -48,7 +48,7 @@ class TestSwap(unittest.TestCase):
         self.assertEqual(vm.vstack.pop(), 2)
 
 
-class TestDiscard(unittest.TestCase):
+class DiscardTestCase(unittest.TestCase):
     def test_it_discards_the_top_item_on_the_value_stack(self):
         vm = VM()
         vm.vstack.push(1)

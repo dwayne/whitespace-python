@@ -4,7 +4,7 @@ from whitespace.instructions.heap_access import Retrieve, Store
 from whitespace.vm import VM
 
 
-class TestStore(unittest.TestCase):
+class StoreTestCase(unittest.TestCase):
     def test_it_stores_the_value_at_the_given_address(self):
         vm = VM()
         vm.vstack.push(1000)
@@ -19,7 +19,7 @@ class TestStore(unittest.TestCase):
         self.assertEqual(vm.memory[1000], 1)
 
 
-class TestRetrieve(unittest.TestCase):
+class RetrieveTestCase(unittest.TestCase):
     def test_it_retrieves_the_value_from_the_given_address(self):
         vm = VM()
         vm.memory[1000] = 5

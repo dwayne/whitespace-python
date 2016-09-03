@@ -8,7 +8,7 @@ from whitespace.parser import Parser, SourceLocation
 parser = Parser()
 
 
-class TestParser(unittest.TestCase):
+class ParserTestCase(unittest.TestCase):
     def test_it_parses_push(self):
         instructions = parser.parse('  \t\t \t\n')
         instruction = instructions[0]
@@ -192,7 +192,7 @@ class TestParser(unittest.TestCase):
         self.assertEqual(instruction.source_location, SourceLocation(0, 0, 0, 3, 1, 1))
 
 
-class TestInstructionParseErrors(unittest.TestCase):
+class InstructionParseErrorsTestCase(unittest.TestCase):
     def test_imp_errors(self):
         with self.assertRaisesRegex(ParseError, 'expected an IMP'):
             parser.parse('\t')
@@ -223,7 +223,7 @@ class TestInstructionParseErrors(unittest.TestCase):
                 parser.parse(src)
 
 
-class TestNumberParsing(unittest.TestCase):
+class NumberParsingTestCase(unittest.TestCase):
     def test_it_parses_1(self):
         instruction = parser.parse('   \t\n')[0]
 
@@ -287,7 +287,7 @@ class TestNumberParsing(unittest.TestCase):
             parser.parse('   \t')
 
 
-class TestLabelParsing(unittest.TestCase):
+class LabelParsingTestCase(unittest.TestCase):
     def test_it_parses_lf_terminated_spaces_tabs(self):
         for src, name in [('\n   \n', ' '), ('\n  \t\n', '\t'), ('\n  \t \t  \n', '\t \t  ')]:
             instruction = parser.parse(src)[0]

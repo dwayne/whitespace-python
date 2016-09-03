@@ -6,7 +6,7 @@ from whitespace.instructions.io import Getc, Getn, Putc, Putn
 from whitespace.vm import VM
 
 
-class PutcTest(unittest.TestCase):
+class PutcTestCase(unittest.TestCase):
     def test_it_outputs_the_character_at_the_top_of_the_value_stack(self):
         console = Console(output=io.StringIO())
         vm = VM(console=console)
@@ -23,7 +23,7 @@ class PutcTest(unittest.TestCase):
         console.output.close()
 
 
-class PutnTest(unittest.TestCase):
+class PutnTestCase(unittest.TestCase):
     def test_it_outputs_the_number_at_the_top_of_the_value_stack(self):
         console = Console(output=io.StringIO())
         vm = VM(console=console)
@@ -40,7 +40,7 @@ class PutnTest(unittest.TestCase):
         console.output.close()
 
 
-class GetcTest(unittest.TestCase):
+class GetcTestCase(unittest.TestCase):
     def test_it_reads_a_character_and_places_it_in_the_location_given_by_the_top_of_the_value_stack(self):
         console = Console(input=io.StringIO('ab'))
         vm = VM(console=console)
@@ -57,7 +57,7 @@ class GetcTest(unittest.TestCase):
         console.input.close()
 
 
-class GetnTest(unittest.TestCase):
+class GetnTestCase(unittest.TestCase):
     def test_it_reads_a_number_and_places_it_in_the_location_given_by_the_top_of_the_value_stack(self):
         console = Console(input=io.StringIO('1234'))
         vm = VM(console=console)

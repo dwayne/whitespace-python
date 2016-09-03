@@ -1,4 +1,3 @@
-import codecs
 import io
 import os
 import unittest
@@ -10,11 +9,11 @@ from whitespace.interpreter import eval
 def src(name):
     path = os.path.join(os.path.dirname(__file__), 'fixtures/{}.ws'.format(name))
 
-    with codecs.open(path, encoding='utf-8') as f:
+    with open(path, encoding='utf-8') as f:
         return f.read()
 
 
-class TestEval(unittest.TestCase):
+class EvalTestCase(unittest.TestCase):
     def setUp(self):
         self.console = Console(input=None, output=io.StringIO())
 

@@ -5,7 +5,7 @@ from whitespace.instructions.arithmetic import Add, Div, Mod, Mul, Sub
 from whitespace.vm import VM
 
 
-class TestAdd(unittest.TestCase):
+class AddTestCase(unittest.TestCase):
     def test_it_adds_the_top_two_items_on_the_value_stack(self):
         vm = VM()
         vm.vstack.push(3)
@@ -20,7 +20,7 @@ class TestAdd(unittest.TestCase):
         self.assertEqual(vm.vstack.top(), 5)
 
 
-class TestSub(unittest.TestCase):
+class SubTestCase(unittest.TestCase):
     def test_it_subtracts_the_top_two_items_on_the_value_stack(self):
         vm = VM()
         vm.vstack.push(3)
@@ -35,7 +35,7 @@ class TestSub(unittest.TestCase):
         self.assertEqual(vm.vstack.top(), 1)
 
 
-class TestMul(unittest.TestCase):
+class MulTestCase(unittest.TestCase):
     def test_it_multiplies_the_top_two_items_on_the_value_stack(self):
         vm = VM()
         vm.vstack.push(3)
@@ -50,7 +50,7 @@ class TestMul(unittest.TestCase):
         self.assertEqual(vm.vstack.top(), 6)
 
 
-class TestDiv(unittest.TestCase):
+class DivTestCase(unittest.TestCase):
     def test_it_divides_the_top_two_items_on_the_value_stack(self):
         vm = VM()
         vm.vstack.push(7)
@@ -76,7 +76,7 @@ class TestDiv(unittest.TestCase):
             div.execute()
 
 
-class TestMod(unittest.TestCase):
+class ModTestCase(unittest.TestCase):
     def test_it_computes_the_remainder_of_the_top_two_items_on_the_value_stack(self):
         vm = VM()
         vm.vstack.push(7)

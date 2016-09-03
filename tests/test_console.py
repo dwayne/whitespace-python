@@ -5,7 +5,7 @@ from whitespace.error import ConsoleError
 from whitespace.console import Console
 
 
-class TestConsole(unittest.TestCase):
+class ConsoleTestCase(unittest.TestCase):
     def setUp(self):
         self.console = Console(input=None, output=io.StringIO())
 

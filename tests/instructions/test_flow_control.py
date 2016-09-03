@@ -6,12 +6,12 @@ from whitespace.instructions.instruction import Noop
 from whitespace.vm import VM
 
 
-class TestLabel(unittest.TestCase):
+class LabelTestCase(unittest.TestCase):
     def test_it_does_not_fail(self):
         Label(' ').execute()
 
 
-class TestCall(unittest.TestCase):
+class CallTestCase(unittest.TestCase):
     def test_it_calls_a_subroutine(self):
         vm = VM()
         vm.load([
@@ -33,7 +33,7 @@ class TestCall(unittest.TestCase):
         self.assertEqual(vm.pc, 2)
 
 
-class TestUjmp(unittest.TestCase):
+class UjmpTestCase(unittest.TestCase):
     def test_it_changes_the_program_counter_to_the_index_of_the_instruction_after_the_label(self):
         vm = VM()
         vm.load([
@@ -51,7 +51,7 @@ class TestUjmp(unittest.TestCase):
         self.assertEqual(vm.pc, 1)
 
 
-class TestZjmpZero(unittest.TestCase):
+class ZjmpZeroTestCase(unittest.TestCase):
     def test_it_changes_the_program_counter_to_the_index_of_the_instruction_after_the_label(self):
         vm = VM()
         vm.load([
@@ -71,7 +71,7 @@ class TestZjmpZero(unittest.TestCase):
         self.assertEqual(vm.pc, 1)
 
 
-class TestZjmpNonZero(unittest.TestCase):
+class ZjmpNonZeroTestCase(unittest.TestCase):
     def test_it_does_not_change_the_program_counter(self):
         vm = VM()
         vm.load([
@@ -91,7 +91,7 @@ class TestZjmpNonZero(unittest.TestCase):
         self.assertEqual(vm.pc, 2)
 
 
-class TestNjmpNegative(unittest.TestCase):
+class NjmpNegativeTestCase(unittest.TestCase):
     def test_it_changes_the_program_counter_to_the_index_of_the_instruction_after_the_label(self):
         vm = VM()
         vm.load([
@@ -111,7 +111,7 @@ class TestNjmpNegative(unittest.TestCase):
         self.assertEqual(vm.pc, 1)
 
 
-class TestNjmpNonNegative(unittest.TestCase):
+class NjmpNonNegativeTestCase(unittest.TestCase):
     def test_it_does_not_change_the_program_counter(self):
         vm = VM()
         vm.load([
@@ -131,7 +131,7 @@ class TestNjmpNonNegative(unittest.TestCase):
         self.assertEqual(vm.pc, 2)
 
 
-class TestRet(unittest.TestCase):
+class RetTestCase(unittest.TestCase):
     def test_it_changes_the_program_counter_to_the_value_at_the_top_of_the_call_stack(self):
         vm = VM()
         vm.cstack.push(5)
@@ -145,7 +145,7 @@ class TestRet(unittest.TestCase):
         self.assertEqual(vm.pc, 5)
 
 
-class TestEnd(unittest.TestCase):
+class EndTestCase(unittest.TestCase):
     def test_it_raises_halt(self):
         end = End()
 
@@ -153,7 +153,7 @@ class TestEnd(unittest.TestCase):
             end.execute()
 
 
-class TestFindLabel(unittest.TestCase):
+class FindLabelTestCase(unittest.TestCase):
     def setUp(self):
         self.instructions = [
             Noop(),

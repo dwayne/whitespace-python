@@ -7,7 +7,7 @@ from whitespace.instructions import *
 from whitespace.vm import VM
 
 
-class TestVM(unittest.TestCase):
+class VMTestCase(unittest.TestCase):
     def test_it_executes_each_instruction_one_by_one_until_an_end_instruction_is_reached(self):
         vm = VM()
         vm.load([
@@ -35,7 +35,7 @@ class TestVM(unittest.TestCase):
             vm.run()
 
 
-class TestCountProgram(unittest.TestCase):
+class CountProgramTestCase(unittest.TestCase):
     def test_it_counts_from_1_to_10(self):
         console = Console(output=io.StringIO())
         vm = VM(console=console)

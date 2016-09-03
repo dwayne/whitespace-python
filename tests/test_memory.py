@@ -5,7 +5,7 @@ from whitespace.error import AddressMissingError
 from whitespace.memory import Memory
 
 
-class TestMemory(unittest.TestCase):
+class MemoryTestCase(unittest.TestCase):
     def test_store_value_at_address(self):
         memory = Memory()
         memory[1] = 'value'
