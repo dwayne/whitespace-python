@@ -2,11 +2,11 @@ Ask the user for a
 number, then calculate its	   	 	
 factorial.		    	
    		 			 
-		    	 
-This program shows how	we		 	  
-handle	recursion	as well as big numbers.		
-   		  	 	
-Try	giving	10000 as an input... 	  
+This	program	shows how we can handle	recursion 
+and arbitrarily big numbers.			 	  
+		    		
+Try giving 10000 as		  	 	
+input...		    	  
    			  	 
 		    	 	
    	     
@@ -77,6 +77,8 @@ Try	giving	10000 as an input...
 
    		  		  		    	 		   		 			 	   		   	  		    	 			  		 		  	 	
    	
+ 
+
 
 	
 

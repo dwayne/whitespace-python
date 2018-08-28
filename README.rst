@@ -32,7 +32,7 @@ For example, here's the `factorial program <https://github.com/dwayne/whitespace
 
     $ whitespace fact.ws
     Enter a number: 40
-    40! = 20397882081197443358640281739902897356800000000
+    40! = 815915283247897734345611269596115894272000000000
 
 Development
 -----------

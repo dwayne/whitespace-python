@@ -38,7 +38,7 @@ class EvalTestCase(unittest.TestCase):
         self.assertEqual(
             self.console.output.getvalue(),
             'Enter a number: '
-            '40! = 20397882081197443358640281739902897356800000000\r\n'
+            '40! = 815915283247897734345611269596115894272000000000\r\n'
         )
 
     def test_it_evaluates_hello_ws(self):
