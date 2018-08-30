@@ -6,10 +6,11 @@ name = "pypi"
 [packages]
 
 [dev-packages]
-twine = "*"
-setuptools = "*"
-wheel = "*"
 "e1839a8" = {editable = true, path = "."}
+pylint = "*"
+setuptools = "*"
+twine = "*"
+wheel = "*"
 
 [requires]
 python_version = "3.7"
