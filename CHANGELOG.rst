@@ -1,14 +1,32 @@
 Change Log
 ----------
 
+`Unreleased`_
+++++++++++++++++++++++++++++
+
+**Added**
+
+- A major rewrite of the system
+- A ``setup.cfg`` and simplified ``setup.py``
+- `Pylint <https://www.pylint.org/>`_ in order to keep an eye on the code style and quality
+
+**Changed**
+
+- Start to use `pyenv <https://github.com/pyenv/pyenv>`_ and `pipenv <https://github.com/pypa/pipenv>`_ for development
+
+**Fixed**
+
+- The 40! bug
+
+
 `1.0.0b2`_ (2016-09-03)
 +++++++++++++++++++++++
 
 **Added**
 
-- A change log (guided by http://keepachangelog.com/)
+- A change log (guided by https://keepachangelog.com/)
 - Notes on installation, usage, development and testing to the README
-- A version badge from http://shields.io/
+- A version badge from https://shields.io/
 - Begin tracking development dependencies
 
 **Changed**
