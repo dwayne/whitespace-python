@@ -1,10 +1,11 @@
-from .console import Console
-from .parser import Parser
+from .parser import parse
+from .peripherals import Keyboard, Screen
 from .vm import VM
 
 
-def eval(src, console=Console()):
-    parser = Parser()
-    vm = VM(console=console)
-    vm.load(parser.parse(src))
+def eval(src, *, keyboard=Keyboard(), screen=Screen(), parse=parse):
+    vm = VM()
+    vm.keyboard = keyboard
+    vm.screen = screen
+    vm.instructions = parse(src)
     vm.run()

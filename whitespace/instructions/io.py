@@ -2,25 +2,25 @@ from .instruction import Instruction
 
 
 class Putc(Instruction):
-    def _execute(self):
-        n = self.vm.vstack.pop()
-        self.vm.console.putc(n)
+    def execute(self, vm):
+        n = vm.vstack.pop()
+        vm.screen.putc(n)
 
 
 class Putn(Instruction):
-    def _execute(self):
-        n = self.vm.vstack.pop()
-        self.vm.console.putn(n)
+    def execute(self, vm):
+        n = vm.vstack.pop()
+        vm.screen.putn(n)
 
 
 class Getc(Instruction):
-    def _execute(self):
-        c = self.vm.console.getc()
-        address = self.vm.vstack.pop()
-        self.vm.memory[address] = ord(c)
+    def execute(self, vm):
+        c = vm.keyboard.getc()
+        address = vm.vstack.pop()
+        vm.memory[address] = ord(c)
 
 
 class Getn(Instruction):
-    def _execute(self):
-        address = self.vm.vstack.pop()
-        self.vm.memory[address] = self.vm.console.getn()
+    def execute(self, vm):
+        address = vm.vstack.pop()
+        vm.memory[address] = vm.keyboard.getn()

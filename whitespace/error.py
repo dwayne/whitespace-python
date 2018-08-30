@@ -12,40 +12,42 @@ class WhitespaceError(Exception):
     pass
 
 
-class AddressMissingError(WhitespaceError, KeyError):
+class ParseError(WhitespaceError):
     pass
 
 
-class LabelMissingError(WhitespaceError, IndexError):
+class RuntimeError(WhitespaceError):
     pass
 
 
-class StackEmptyError(WhitespaceError, IndexError):
+class AddressMissingError(RuntimeError, KeyError):
+    pass
+
+
+class LabelMissingError(RuntimeError, IndexError):
+    pass
+
+
+class StackEmptyError(RuntimeError, IndexError):
     def __init__(self, name):
-        self.name = name
+        super().__init__()
+        self._name = name
 
     def __str__(self):
-        if self.name:
-            return self.name
-        else:
-            return ''
+        return str(self._name)
 
 
-class OutOfBoundsError(WhitespaceError, IndexError):
+class OutOfBoundsError(RuntimeError, IndexError):
     pass
 
 
-class ZeroDivisionError(WhitespaceError, builtins.ZeroDivisionError):
+class ZeroDivisionError(RuntimeError, builtins.ZeroDivisionError):
     pass
 
 
-class ConsoleError(WhitespaceError):
+class IOError(RuntimeError):
     pass
 
 
-class Halt(WhitespaceError):
-    pass
-
-
-class ParseError(WhitespaceError):
+class Halt(RuntimeError):
     pass

@@ -8,10 +8,7 @@ class PushTestCase(unittest.TestCase):
     def test_it_pushes_a_number_onto_the_value_stack(self):
         vm = VM()
 
-        push = Push(1)
-        push.vm = vm
-
-        push.execute()
+        Push(1).execute(vm)
 
         self.assertEqual(len(vm.vstack), 1)
         self.assertEqual(vm.vstack.top(), 1)
@@ -22,10 +19,7 @@ class DupTestCase(unittest.TestCase):
         vm = VM()
         vm.vstack.push(1)
 
-        dup = Dup()
-        dup.vm = vm
-
-        dup.execute()
+        Dup().execute(vm)
 
         self.assertEqual(len(vm.vstack), 2)
         self.assertEqual(vm.vstack.pop(), 1)
@@ -37,15 +31,14 @@ class SwapTestCase(unittest.TestCase):
         vm = VM()
         vm.vstack.push(1)
         vm.vstack.push(2)
+        vm.vstack.push(3)
 
-        swap = Swap()
-        swap.vm = vm
+        Swap().execute(vm)
 
-        swap.execute()
-
-        self.assertEqual(len(vm.vstack), 2)
-        self.assertEqual(vm.vstack.pop(), 1)
+        self.assertEqual(len(vm.vstack), 3)
         self.assertEqual(vm.vstack.pop(), 2)
+        self.assertEqual(vm.vstack.pop(), 3)
+        self.assertEqual(vm.vstack.pop(), 1)
 
 
 class DiscardTestCase(unittest.TestCase):
@@ -53,9 +46,6 @@ class DiscardTestCase(unittest.TestCase):
         vm = VM()
         vm.vstack.push(1)
 
-        discard = Discard()
-        discard.vm = vm
-
-        discard.execute()
+        Discard().execute(vm)
 
         self.assertEqual(len(vm.vstack), 0)

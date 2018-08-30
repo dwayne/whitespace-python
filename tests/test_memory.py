@@ -1,6 +1,5 @@
 import unittest
 
-
 from whitespace.error import AddressMissingError
 from whitespace.memory import Memory
 

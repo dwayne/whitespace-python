@@ -3,27 +3,27 @@ from .instruction import Instruction
 
 class Push(Instruction):
     def __init__(self, n):
-        super(Push, self).__init__()
+        super().__init__()
         self.n = n
 
-    def _execute(self):
-        self.vm.vstack.push(self.n)
+    def execute(self, vm):
+        vm.vstack.push(self.n)
 
 
 class Dup(Instruction):
-    def _execute(self):
-        self.vm.vstack.push(self.vm.vstack.top())
+    def execute(self, vm):
+        vm.vstack.push(vm.vstack.top())
 
 
 class Swap(Instruction):
-    def _execute(self):
-        a = self.vm.vstack.pop()
-        b = self.vm.vstack.pop()
+    def execute(self, vm):
+        a = vm.vstack.pop()
+        b = vm.vstack.pop()
 
-        self.vm.vstack.push(a)
-        self.vm.vstack.push(b)
+        vm.vstack.push(a)
+        vm.vstack.push(b)
 
 
 class Discard(Instruction):
-    def _execute(self):
-        self.vm.vstack.pop()
+    def execute(self, vm):
+        vm.vstack.pop()

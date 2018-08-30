@@ -10,10 +10,7 @@ class StoreTestCase(unittest.TestCase):
         vm.vstack.push(1000)
         vm.vstack.push(1)
 
-        store = Store()
-        store.vm = vm
-
-        store.execute()
+        Store().execute(vm)
 
         self.assertEqual(len(vm.vstack), 0)
         self.assertEqual(vm.memory[1000], 1)
@@ -25,10 +22,7 @@ class RetrieveTestCase(unittest.TestCase):
         vm.memory[1000] = 5
         vm.vstack.push(1000)
 
-        retrieve = Retrieve()
-        retrieve.vm = vm
-
-        retrieve.execute()
+        Retrieve().execute(vm)
 
         self.assertEqual(len(vm.vstack), 1)
         self.assertEqual(vm.vstack.top(), 5)

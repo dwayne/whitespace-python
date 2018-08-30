@@ -1,56 +1,49 @@
+import operator
+
 from ..error import ZeroDivisionError
 from .instruction import Instruction
 
 
 class Add(Instruction):
-    def _execute(self):
-        _compute(self.vm, '+')
+    def execute(self, vm):
+        _compute(vm, operator.add)
 
 
 class Sub(Instruction):
-    def _execute(self):
-        _compute(self.vm, '-')
+    def execute(self, vm):
+        _compute(vm, operator.sub)
 
 
 class Mul(Instruction):
-    def _execute(self):
-        _compute(self.vm, '*')
+    def execute(self, vm):
+        _compute(vm, operator.mul)
 
 
 class Div(Instruction):
-    def _execute(self):
-        _compute(self.vm, '/')
+    def execute(self, vm):
+        _compute(vm, _div)
 
 
 class Mod(Instruction):
-    def _execute(self):
-        _compute(self.vm, '%')
+    def execute(self, vm):
+        _compute(vm, _mod)
 
 
-def _div(x, y):
-    if y == 0:
+def _div(a, b):
+    if b == 0:
         raise ZeroDivisionError('integer division by zero')
-    else:
-        return x // y
+
+    return a // b
 
 
-def _mod(x, y):
-    if y == 0:
+def _mod(a, b):
+    if b == 0:
         raise ZeroDivisionError('modulo by zero')
-    else:
-        return x % y
 
-
-_binops = {
-    '+': lambda x, y: x + y,
-    '-': lambda x, y: x - y,
-    '*': lambda x, y: x * y,
-    '/': _div,
-    '%': _mod
-}
+    return a % b
 
 
 def _compute(vm, op):
-    right = vm.vstack.pop()
-    left = vm.vstack.pop()
-    vm.vstack.push(_binops[op](left, right))
+    b = vm.vstack.pop()
+    a = vm.vstack.pop()
+    vm.vstack.push(op(a, b))

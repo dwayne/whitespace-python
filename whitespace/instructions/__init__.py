@@ -6,9 +6,7 @@ from .stack_manipulation import Discard, Dup, Push, Swap
 
 
 __all__ = [
-    'Push', 'Dup', 'Swap', 'Discard',
-    'Add', 'Sub', 'Mul', 'Div', 'Mod',
-    'Store', 'Retrieve',
-    'Label', 'Call', 'Ujmp', 'Zjmp', 'Njmp', 'Ret', 'End',
-    'Putc', 'Putn', 'Getc', 'Getn'
+    'Add', 'Call', 'Discard', 'Div', 'Dup', 'End', 'Getc', 'Getn', 'Label',
+    'Mod', 'Mul', 'Njmp', 'Push', 'Putc', 'Putn', 'Ret', 'Retrieve', 'Store',
+    'Sub', 'Swap', 'Ujmp', 'Zjmp'
 ]

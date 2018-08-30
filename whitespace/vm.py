@@ -1,43 +1,40 @@
-from .console import Console
-from .error import Halt, OutOfBoundsError
+from .error import Halt, LabelMissingError, OutOfBoundsError
+from .instructions import Label
 from .memory import Memory
 from .stack import Stack
 
 
 class VM:
-    def __init__(self, console=Console()):
-        self.console = console
+    def __init__(self):
         self.instructions = []
         self._reset()
 
-    def load(self, instructions):
-        for instruction in instructions:
-            instruction.vm = self
+    def find_label(self, name):
+        for loc, instruction in enumerate(self.instructions):
+            if isinstance(instruction, Label) and instruction.name == name:
+                return loc
 
-        self.instructions = list(instructions)
+        raise LabelMissingError(name)
 
     def run(self):
         self._reset()
 
         try:
-            self._run_loop()
+            while True:
+                instruction = self._fetch_instruction()
+                self.pc += 1
+                instruction.execute(self)
         except Halt:
             pass
 
     def _reset(self):
-        self.vstack = Stack('vstack')
-        self.cstack = Stack('cstack')
+        self.vstack = Stack('value stack')
+        self.cstack = Stack('call stack')
         self.memory = Memory()
         self.pc = 0
-
-    def _run_loop(self):
-        while True:
-            instruction = self._fetch_instruction()
-            self.pc += 1
-            instruction.execute()
 
     def _fetch_instruction(self):
         try:
             return self.instructions[self.pc]
         except IndexError:
-            raise OutOfBoundsError('program counter: %s' % self.pc)
+            raise OutOfBoundsError('program counter: %d' % self.pc)

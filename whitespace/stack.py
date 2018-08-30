@@ -4,22 +4,25 @@ from .error import StackEmptyError
 class Stack:
     def __init__(self, name=None):
         self.name = name
-        self.elements = []
+        self._elements = []
+
+    def empty(self):
+        return not self._elements
 
     def push(self, x):
-        self.elements.append(x)
+        self._elements.append(x)
 
     def pop(self):
-        if self.elements:
-            return self.elements.pop()
-        else:
+        if self.empty():
             raise StackEmptyError(self.name)
+
+        return self._elements.pop()
 
     def top(self):
-        if self.elements:
-            return self.elements[-1]
-        else:
+        if self.empty():
             raise StackEmptyError(self.name)
 
+        return self._elements[-1]
+
     def __len__(self):
-        return len(self.elements)
+        return len(self._elements)

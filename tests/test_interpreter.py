@@ -2,7 +2,7 @@ import io
 import os
 import unittest
 
-from whitespace.console import Console
+from whitespace.peripherals import TestKeyboard, TestScreen
 from whitespace.interpreter import eval
 
 
@@ -15,47 +15,41 @@ def src(name):
 
 class EvalTestCase(unittest.TestCase):
     def setUp(self):
-        self.console = Console(input=None, output=io.StringIO())
+        self.keyboard = TestKeyboard()
+        self.screen = TestScreen()
 
     def tearDown(self):
-        if self.console.input:
-            self.console.input.close()
-        self.console.output.close()
+        self.keyboard.detach()
+        self.screen.turnOff()
 
     def test_it_evaluates_count_ws(self):
-        eval(src('count'), console=self.console)
+        eval(src('count'), screen=self.screen)
 
-        self.assertEqual(
-            self.console.output.getvalue(),
-            '1\n2\n3\n4\n5\n6\n7\n8\n9\n10\n'
-        )
+        self.assertEqual(self.screen.contents, '1\n2\n3\n4\n5\n6\n7\n8\n9\n10\n')
 
     def test_it_evaluates_fact_ws(self):
-        self.console.input = io.StringIO('40')
+        self.keyboard.enter('40')
 
-        eval(src('fact'), console=self.console)
+        eval(src('fact'), keyboard=self.keyboard, screen=self.screen)
 
         self.assertEqual(
-            self.console.output.getvalue(),
+            self.screen.contents,
             'Enter a number: '
             '40! = 815915283247897734345611269596115894272000000000\r\n'
         )
 
     def test_it_evaluates_hello_ws(self):
-        eval(src('hello'), console=self.console)
+        eval(src('hello'), screen=self.screen)
 
-        self.assertEqual(
-            self.console.output.getvalue(),
-            'Hello, world of spaces!\r\n'
-        )
+        self.assertEqual(self.screen.contents, 'Hello, world of spaces!\r\n')
 
     def test_it_evaluates_name_ws(self):
-        self.console.input = io.StringIO('Dwayne\n')
+        self.keyboard.enter('Dwayne\n')
 
-        eval(src('name'), console=self.console)
+        eval(src('name'), keyboard=self.keyboard, screen=self.screen)
 
         self.assertEqual(
-            self.console.output.getvalue(),
+            self.screen.contents,
             'Please enter your name: '
             'Hello Dwayne\n\r\n'
         )

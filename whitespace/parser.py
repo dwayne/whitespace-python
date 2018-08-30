@@ -4,12 +4,8 @@ from .error import ParseError
 from .instructions import *
 
 
-space = ' '
-tab   = '\t'
-lf    = '\n'
-
-
-tokens = [space, tab, lf]
+SPACE, TAB, LF = ' ', '\t', '\n'
+TOKENS = [SPACE, TAB, LF]
 
 
 SourceLocation = namedtuple(
@@ -19,7 +15,10 @@ SourceLocation = namedtuple(
 
 
 class Parser:
-    def parse(self, src):
+    def __call__(self, src):
+        return self._parse(src)
+
+    def _parse(self, src):
         self._instructions = []
 
         self._src = src
@@ -46,19 +45,19 @@ class Parser:
 
         self._capture_start()
 
-        if t == space:
+        if t == SPACE:
             return self._parse_stack_manipulation()
-        elif t == tab:
+        elif t == TAB:
             t = self._next_token()
-            if t == space:
+            if t == SPACE:
                 return self._parse_arithmetic()
-            elif t == tab:
+            elif t == TAB:
                 return self._parse_heap_access()
-            elif t == lf:
+            elif t == LF:
                 return self._parse_io()
             else:
                 raise self._parse_error('expected an IMP')
-        elif t == lf:
+        elif t == LF:
             return self._parse_flow_control()
         else:
             return self._instructions
@@ -66,17 +65,17 @@ class Parser:
     def _parse_stack_manipulation(self):
         t = self._next_token()
 
-        if t == space:
+        if t == SPACE:
             n = self._parse_number()
             return self._capture_instruction_and_continue(Push(n))
-        elif t == lf:
+        elif t == LF:
             t = self._next_token()
 
-            if t == space:
+            if t == SPACE:
                 return self._capture_instruction_and_continue(Dup())
-            elif t == tab:
+            elif t == TAB:
                 return self._capture_instruction_and_continue(Swap())
-            elif t == lf:
+            elif t == LF:
                 return self._capture_instruction_and_continue(Discard())
             else:
                 raise self._parse_error('expected a stack manipulation instruction')
@@ -86,23 +85,23 @@ class Parser:
     def _parse_arithmetic(self):
         t = self._next_token()
 
-        if t == space:
+        if t == SPACE:
             t = self._next_token()
 
-            if t == space:
+            if t == SPACE:
                 return self._capture_instruction_and_continue(Add())
-            elif t == tab:
+            elif t == TAB:
                 return self._capture_instruction_and_continue(Sub())
-            elif t == lf:
+            elif t == LF:
                 return self._capture_instruction_and_continue(Mul())
             else:
                 raise self._parse_error('expected an arithmetic instruction')
-        elif t == tab:
+        elif t == TAB:
             t = self._next_token()
 
-            if t == space:
+            if t == SPACE:
                 return self._capture_instruction_and_continue(Div())
-            elif t == tab:
+            elif t == TAB:
                 return self._capture_instruction_and_continue(Mod())
             else:
                 raise self._parse_error('expected an arithmetic instruction')
@@ -112,9 +111,9 @@ class Parser:
     def _parse_heap_access(self):
         t = self._next_token()
 
-        if t == space:
+        if t == SPACE:
             return self._capture_instruction_and_continue(Store())
-        elif t == tab:
+        elif t == TAB:
             return self._capture_instruction_and_continue(Retrieve())
         else:
             raise self._parse_error('expected a heap access instruction')
@@ -122,37 +121,37 @@ class Parser:
     def _parse_flow_control(self):
         t = self._next_token()
 
-        if t == space:
+        if t == SPACE:
             t = self._next_token()
 
-            if t == space:
+            if t == SPACE:
                 name = self._parse_label()
                 return self._capture_instruction_and_continue(Label(name))
-            elif t == tab:
+            elif t == TAB:
                 name = self._parse_label()
                 return self._capture_instruction_and_continue(Call(name))
-            elif t == lf:
+            elif t == LF:
                 name = self._parse_label()
                 return self._capture_instruction_and_continue(Ujmp(name))
             else:
                 raise self._parse_error('expected a flow control instruction')
-        elif t == tab:
+        elif t == TAB:
             t = self._next_token()
 
-            if t == space:
+            if t == SPACE:
                 name = self._parse_label()
                 return self._capture_instruction_and_continue(Zjmp(name))
-            elif t == tab:
+            elif t == TAB:
                 name = self._parse_label()
                 return self._capture_instruction_and_continue(Njmp(name))
-            elif t == lf:
+            elif t == LF:
                 return self._capture_instruction_and_continue(Ret())
             else:
                 raise self._parse_error('expected a flow control instruction')
-        elif t == lf:
+        elif t == LF:
             t = self._next_token()
 
-            if t == lf:
+            if t == LF:
                 return self._capture_instruction_and_continue(End())
             else:
                 raise self._parse_error('expected a flow control instruction')
@@ -162,21 +161,21 @@ class Parser:
     def _parse_io(self):
         t = self._next_token()
 
-        if t == space:
+        if t == SPACE:
             t = self._next_token()
 
-            if t == space:
+            if t == SPACE:
                 return self._capture_instruction_and_continue(Putc())
-            elif t == tab:
+            elif t == TAB:
                 return self._capture_instruction_and_continue(Putn())
             else:
                 raise self._parse_error('expected an I/O instruction')
-        elif t == tab:
+        elif t == TAB:
             t = self._next_token()
 
-            if t == space:
+            if t == SPACE:
                 return self._capture_instruction_and_continue(Getc())
-            elif t == tab:
+            elif t == TAB:
                 return self._capture_instruction_and_continue(Getn())
             else:
                 raise self._parse_error('expected an I/O instruction')
@@ -191,9 +190,9 @@ class Parser:
 
         self._capture_substart()
 
-        if t == space:
+        if t == SPACE:
             return 1
-        elif t == tab:
+        elif t == TAB:
             return -1
         else:
             raise self._parse_error('expected a sign')
@@ -206,11 +205,11 @@ class Parser:
         return self._parse_positive_number_rec(0, 0, t)
 
     def _parse_positive_number_rec(self, n, l, t):
-        if t == space:
+        if t == SPACE:
             return self._parse_positive_number_rec(2 * n, l + 1, self._next_token())
-        elif t == tab:
+        elif t == TAB:
             return self._parse_positive_number_rec(2 * n + 1, l + 1, self._next_token())
-        elif t == lf:
+        elif t == LF:
             if l > 0:
                 return n
             else:
@@ -226,9 +225,9 @@ class Parser:
         return self._parse_label_rec('', 0, t)
 
     def _parse_label_rec(self, name, l, t):
-        if t == space or t == tab:
+        if t == SPACE or t == TAB:
             return self._parse_label_rec(name + t, l + 1, self._next_token())
-        elif t == lf:
+        elif t == LF:
             if l > 0:
                 return name
             else:
@@ -249,7 +248,7 @@ class Parser:
         self._current_column += 1
         c = self._c()
 
-        while c and c not in tokens:
+        while c and c not in TOKENS:
             if self._current_index + 1 == self._src_length:
                 return None
 
@@ -257,7 +256,7 @@ class Parser:
             self._current_column += 1
             c = self._c()
 
-        if c == lf:
+        if c == LF:
             self._next_line = True
 
         return c
@@ -300,3 +299,6 @@ class Parser:
             )
 
         return ParseError('{}, {} {}'.format(message, line_from_info, line_to_info))
+
+
+parse = Parser()
