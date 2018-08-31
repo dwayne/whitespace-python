@@ -1,7 +1,7 @@
 Change Log
 ----------
 
-`Unreleased`_
+`1.0.0-beta.8`_ (2018-08-31)
 ++++++++++++++++++++++++++++
 
 **Added**
@@ -13,6 +13,7 @@ Change Log
 **Changed**
 
 - Start to use `pyenv <https://github.com/pyenv/pyenv>`_ and `pipenv <https://github.com/pypa/pipenv>`_ for development
+- Switch to semantic versioning
 
 **Fixed**
 
@@ -71,7 +72,8 @@ Change Log
 
 Birth!
 
-.. _`Unreleased`: https://github.com/dwayne/whitespace-python/compare/v1.0.0b2...HEAD
+.. _`Unreleased`: https://github.com/dwayne/whitespace-python/compare/v1.0.0-beta.8...HEAD
+.. _`1.0.0-beta.8`: https://github.com/dwayne/whitespace-python/compare/v1.0.0b2...v1.0.0-beta.8
 .. _`1.0.0b2`: https://github.com/dwayne/whitespace-python/compare/v1.0.0b1...v1.0.0b2
 .. _`1.0.0b1`: https://github.com/dwayne/whitespace-python/compare/v0.1.0.dev2...v1.0.0b1
 .. _`0.1.0.dev2`: https://github.com/dwayne/whitespace-python/compare/v0.1.0.dev1...v0.1.0.dev2
